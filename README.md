@@ -4,204 +4,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Quête de notre Amour ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Notre Ciel Étoilé ❤️️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #1a1a2e;
-            --card-bg: #16213e;
-            --primary: #e94560;
-            --text: #ffffff;
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
+            background-color: #05050f;
+            color: #ffffff;
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .game-container {
-            background-color: var(--card-bg);
-            width: 100%;
-            max-width: 600px;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
-            border: 2px solid var(--primary);
-            text-align: center;
-        }
-
-        h2 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1rem;
-            color: var(--primary);
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .story-box {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 10px;
-        }
-
-        .choices {
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 30px;
         }
 
-        button {
-            background-color: var(--primary);
-            color: var(--text);
-            border: none;
-            padding: 15px 20px;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, background-color 0.2s;
-            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+        header {
+            text-align: center;
+            z-index: 10;
         }
 
-        button:hover {
-            transform: scale(1.02);
-            background-color: #ff6b81;
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
         }
 
-        .heart-rain {
-            position: fixed;
+        p {
+            font-size: 0.95rem;
+            color: #a0a0c0;
+        }
+
+        /* Le Ciel / Zone interactive */
+        .sky {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 999;
-            display: none;
+            z-index: 1;
         }
 
-        .heart {
+        .star {
             position: absolute;
-            color: var(--primary);
-            font-size: 24px;
-            animation: fall linear forwards;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        .star:hover {
+            transform: scale(2);
+            background-color: #ffd700;
+        }
+
+        /* Fenêtre de message flottante */
+        .message-box {
+            position: relative;
+            z-index: 10;
+            background: rgba(20, 20, 35, 0.85);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 20px 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message-box p {
+            color: #ffffff;
+            font-size: 1.05vrem;
+            line-height: 1.5;
+        }
+
+        /* Instructions */
+        .instruction {
+            font-size: 0.85rem;
+            color: #ffd700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            z-index: 10;
+            margin-bottom: -10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="game-container">
-        <h2 id="game-title">Étape 1 : Le Point de Départ</h2>
-        <div class="story-box" id="story-text">
-            Il était une fois, un regard qui a tout changé... Prête à revivre notre première année, Sarah ?
-        </div>
-        <div class="choices" id="choices-container">
-            <button onclick="nextStep(1)">Commencer l'aventure ❤️</button>
-        </div>
+    <header>
+        <h1>Notre Constellation</h1>
+        <p>1 an d'amour gravé dans les étoiles, Sarah.</p>
+    </header>
+
+    <div class="sky" id="sky"></div>
+
+    <div class="instruction">Clique sur les étoiles scintillantes pour lire nos souvenirs</div>
+
+    <div class="message-box">
+        <p id="memory-text">Chaque étoile de ce ciel représente un moment magique partagé à tes côtés depuis un an. Clique sur l'une d'elles pour commencer le voyage...</p>
     </div>
 
-    <div class="heart-rain" id="heartRain"></div>
-
     <script>
-        const steps = [
-            {
-                title: "Étape 1 : Le Regard",
-                text: "Tout a commencé il y a un an jour pour jour. Si tu devais résumer notre premier regard, ce serait...",
-                choices: [
-                    { text: "Une évidence totale instantanée ✨", next: 2 },
-                    { text: "Un coup de foudre mémorable ⚡", next: 2 }
-                ]
-            },
-            {
-                title: "Étape 2 : Les Fous Rires",
-                text: "Depuis, on ne compte plus les éclats de rire et les moments de complicité. Quel est notre super-pouvoir ?",
-                choices: [
-                    { text: "Se comprendre rien qu'en se regardant 🤫", next: 3 },
-                    { text: "Rire de tout, n'importe quand 😂", next: 3 }
-                ]
-            },
-            {
-                title: "Étape 3 : Le Bilan",
-                text: "365 jours plus tard, on en est là. Qu'est-ce qui t'attend pour la suite ?",
-                choices: [
-                    { text: "Encore des milliers de moments magiques 🚀", next: 4 },
-                    { text: "Une vie entière de bonheur à mes côtés 🥰", next: 4 }
-                ]
-            },
-            {
-                title: "Victoire : 1 an d'Amour pur !",
-                text: "Joyeux anniversaire de rencontre, mon amour ! Tu gagnes mon cœur pour l'éternité (et ça, c'est permanent). Je t'aime plus que tout, Sarah !",
-                choices: [
-                    { text: "Célébrer notre amour 💖", next: 'end' }
-                ]
-            }
+        // Liste des souvenirs cachés dans les étoiles
+        const memories = [
+            "Le premier jour : Ce regard qui a tout basculé et qui a fait de toi mon évidence.",
+            "Nos fous rires interminables : Ces moments où on rit pour rien, juste parce qu'on est ensemble.",
+            "Nos projets et nos rêves : Regarder dans la même direction et construire l'avenir.",
+            "Le quotidien : Même les jours ordinaires deviennent extraordinaires quand tu es là.",
+            "Aujourd'hui - 1 An : 365 jours de bonheur pur. Et ce n'est que le tout début de notre histoire. Je t'aime, Sarah ❤️"
         ];
 
-        function nextStep(stepIndex) {
-            if (stepIndex === 'end') {
-                triggerCelebration();
-                return;
-            }
+        const sky = document.getElementById("sky");
+        const memoryText = document.getElementById("memory-text");
 
-            const current = steps[stepIndex - 1];
-            document.getElementById("game-title").innerText = current.title;
-            document.getElementById("story-text").innerText = current.text;
+        // Générer un ciel étoilé aléatoire
+        const starCount = 40;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement("div");
+            star.className = "star";
             
-            const container = document.getElementById("choices-container");
-            container.innerHTML = "";
+            const x = Math.random() * 90 + 5; // position en %
+            const y = Math.random() * 70 + 15;
+            const size = Math.random() * 4 + 2; // taille entre 2 et 6px
             
-            current.choices.forEach(choice => {
-                const btn = document.createElement("button");
-                btn.innerText = choice.text;
-                btn.onclick = () => nextStep(choice.next);
-                container.appendChild(btn);
-            });
-        }
+            star.style.left = x + "vw";
+            star.style.top = y + "vh";
+            star.style.width = size + "px";
+            star.style.height = size + "px";
+            
+            // Effet de scintillement aléatoire
+            star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite alternate`;
 
-        function triggerCelebration() {
-            document.querySelector(".game-container").innerHTML = `
-                <h2 style="font-family: 'Poppins'; font-size: 1.8rem; color: #e94560;">Joyeux 1 An, Sarah ! ❤️</h2>
-                <p style="font-size: 1.2rem; line-height: 1.8; margin: 20px 0;">
-                    Merci d'illuminer mes journées, d'être là, et de rendre chaque instant si précieux.<br>
-                    <strong>Je t'aime infiniment.</strong>
-                </p>
-            `;
-            
-            const rain = document.getElementById("heartRain");
-            rain.style.display = "block";
-            for (let i = 0; i < 50; i++) {
+            // Assigner un souvenir aléatoire ou séquentiel au clic
+            const randomMemory = memories[Math.floor(Math.random() * memories.length)];
+            star.onclick = () => {
+                memoryText.style.opacity = 0;
                 setTimeout(() => {
-                    const heart = document.createElement("div");
-                    heart.className = "heart";
-                    heart.innerHTML = "❤️";
-                    heart.style.left = Math.random() * 100 + "vw";
-                    heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
-                    rain.appendChild(heart);
-                    setTimeout(() => heart.remove(), 4000);
-                }, i * 100);
-            }
+                    memoryText.innerText = randomMemory;
+                    memoryText.style.opacity = 1;
+                }, 200);
+            };
+
+            sky.appendChild(star);
         }
     </script>
 </body>
